@@ -1,5 +1,7 @@
 <?php
 
+namespace HomeControl;
+
 class Domoticz {
 
 	const URL = "http://127.0.0.1:8080";
