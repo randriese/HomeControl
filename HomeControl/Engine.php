@@ -22,7 +22,7 @@ class Engine {
         $deviceAndStatusPairs = array();
         foreach(explode('#', $commandString) as $deviceAndStatusPair) {
             $keyval=explode('|',$deviceAndStatusPair);
-		    if(count($keyval) > 1) {
+            if(count($keyval) > 1) {
                 $deviceAndStatusPairs[$keyval[0]] = $keyval[1];
             } else {
                 $deviceAndStatusPairs[$keyval[0]] = '';

@@ -1,7 +1,7 @@
 <?php
 class Autoloader {
     static public function loader($className) {
-	$path = '/var/sites/homecontrol.nl/';
+        $path = '/var/sites/homecontrol.nl/';
         $filename = str_replace('\\', '/', $className) . ".php";
         if (file_exists($path.$filename)) {
             include($path.$filename);
@@ -13,4 +13,3 @@ class Autoloader {
     }
 }
 spl_autoload_register('Autoloader::loader');
-
