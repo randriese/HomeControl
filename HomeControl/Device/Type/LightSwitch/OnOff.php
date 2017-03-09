@@ -1,8 +1,8 @@
 <?php
 
-namespace HomeControl\Device\Type\P1;
+namespace HomeControl\Device\Type\LightSwitch;
 
-class Gas 
+class OnOff 
 	extends \HomeControl\Device\BaseDevice
 	implements \HomeControl\Device\Type\IType
 {

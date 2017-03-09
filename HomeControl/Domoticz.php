@@ -4,7 +4,7 @@ namespace HomeControl;
 
 class Domoticz {
 
-	const URL = "http://127.0.0.1:8080";
+	const URL = "http://192.168.1.219:8080";
 	const logLevel = DomoticzLogLevel::TRACE;
 
 	/**
@@ -51,6 +51,26 @@ class Domoticz {
 	public function log ($message, $level = null) {
 
 	}
+
+    public function getDevices($usedOnly = true) {
+        try {
+            $response = json_decode(file_get_contents(sprintf('%s/json.htm?type=devices%s', self::URL, ($usedOnly) ? '&used=true' : '')), true);
+            if ($response['status'] == 'OK' && isset($response['result'])) {
+                $this->parseDevices($response['result']);
+            }
+        } catch (Exception $ex) {
+            echo 'cannot fetch devices';
+        }
+    }
+
+    public function parseDevices($devices) {
+        if (is_array($devices)) {
+            foreach($devices as $tmpDevice) {
+                $Device = \HomeControl\Device\Factory::getDeviceClass($tmpDevice);
+                apc_store($Device->getName(), $Device);
+            }
+        }
+    }
 
 	private function sendToDomoticz ($cmds) {
 		if (!is_array($cmds)) {
