@@ -7,12 +7,12 @@ class Engine {
     public function __construct($commandString) {
         if (strlen($commandString) > 0) {
             foreach($this->parseCommand($commandString) as $device => $status) {
-                $cachedDevice = apc_fetch($device);
+                $cachedDevice = \HomeControl\Cache::getInstance()->fetch($device);
                 if (is_object($cachedDevice)) {
                     printf('%s (%d) - %s to %s<br/>', $cachedDevice->getName(), $cachedDevice->getTimestamp(), $cachedDevice->getstatus(), $status);
                     $cachedDevice->setStatus($status);
                     $cachedDevice->setTimestamp(time());
-                    apc_store($cachedDevice->getName(), $cachedDevice);
+                    \HomeControl\Cache::getInstance()->store($cachedDevice->getName(), $cachedDevice);
                 }
             }
         }

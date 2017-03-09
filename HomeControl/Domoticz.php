@@ -6,6 +6,14 @@ class Domoticz {
 
 	const URL = "http://192.168.1.219:8080";
 	const logLevel = DomoticzLogLevel::TRACE;
+    private static $instance = null;
+
+    public static function getInstance() {
+        if(!isset(self::$instance)) {
+            self::$instance = new Domoticz();
+        }
+        return self::$instance;
+    }
 
 	/**
 	* Method to switch (light) devices 
@@ -15,7 +23,16 @@ class Domoticz {
 	* @return void
 	**/
 	public function switchDevice ($idx, $command = "Toggle", $comment = null) {
-		
+		try {
+            $response = json_decode(file_get_contents(sprintf('%s/json.htm?type=command&param=switchlight&idx=%d&switchcmd=%s', self::URL, $idx, $command)), true);
+            if ($response['status'] == 'OK') {
+                return true;
+            }
+            return false; 
+        } catch (Exception $ex) {
+            
+        }
+        return false;
 	}
 
 	/**
@@ -26,7 +43,16 @@ class Domoticz {
 	* @return void
 	**/
 	public function setDeviceLevel ($idx, $level, $comment = null) {
-		
+		try {
+            $response = json_decode(file_get_contents(sprintf('%s/json.htm?type=command&param=switchlight&idx=%d&switchcmd=%s&level=%d', self::URL, $idx, 'Set%20Level', $level)), true);
+            if ($response['status'] == 'OK') {
+                return true;
+            }
+            return false; 
+        } catch (Exception $ex) {
+            
+        }
+        return false;
 	}
 
 	/**
