@@ -11,6 +11,7 @@ class Factory {
     const TYPE_P1_UTILITY = "P1 Smart Meter";
 
     const SWITCHTYPE_SWITCH_DIMMER = "Dimmer";
+    const SWITCHTYPE_SWITCH_RGBW = "RGBW";
     const SWITCHTYPE_SWITCH_MOTION = "Motion Sensor";
     const SWITCHTYPE_SWITCH_ONOFF = "On/Off";
 
@@ -26,6 +27,9 @@ class Factory {
                 switch($device["SwitchType"]) {
                     case self::SWITCHTYPE_SWITCH_DIMMER:
                         return new \HomeControl\Device\Type\LightSwitch\Dimmer($device);
+                        break;
+                    case self::SWITCHTYPE_SWITCH_RGBW:
+                        return new \HomeControl\Device\Type\LightSwitch\RGBW($device);
                         break;
                     case self::SWITCHTYPE_SWITCH_MOTION:
                         return new \HomeControl\Device\Type\LightSwitch\MotionSensor($device);

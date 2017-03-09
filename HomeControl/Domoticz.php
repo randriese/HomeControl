@@ -64,7 +64,17 @@ class Domoticz {
     * @param string $comment comment to send to the log file
     * @return void
     **/
-    public function setRGBWDevice ($idx, $hue, $brightness, $comment = null) {
+    public function setRGBWDevice ($idx, $hue, $brightness, $isWhite, $comment = null) {
+        try {
+            $response = json_decode(file_get_contents(sprintf('%s/json.htm?type=command&param=setcolbrightnessvalue&idx=%d&hue=%d&brightness=%d&iswhite=%s', self::URL, $idx, $hue, $brightness, ($isWhite) ? 'true' : 'false')), true);
+            if ($response['status'] == 'OK') {
+                return true;
+            }
+            return false; 
+        } catch (Exception $ex) {
+            
+        }
+        return false;
     }
 
     /**
