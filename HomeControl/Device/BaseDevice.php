@@ -57,4 +57,8 @@ class BaseDevice {
     public function setTimestamp($timestamp) {
         $this->timestamp = $timestamp;
     }
+
+    public function saveToCache() {
+        \HomeControl\Cache::getInstance()->store($this->getName(), $this);
+    }
 }

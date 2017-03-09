@@ -97,6 +97,17 @@ class Domoticz {
         }
     }
 
+    public function updateDevice($idx) {
+        try {
+            $response = json_decode(file_get_contents(sprintf('%s/json.htm?type=devices&rid=%d', self::URL, $idx)), true);
+            if ($response['status'] == 'OK' && isset($response['result'])) {
+                $this->parseDevices($response['result']);
+            }
+        } catch (Exception $ex) {
+            echo 'cannot fetch device';
+        }
+    }
+
     public function parseDevices($devices) {
         if (is_array($devices)) {
             foreach($devices as $tmpDevice) {

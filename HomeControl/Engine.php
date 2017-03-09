@@ -9,10 +9,12 @@ class Engine {
             foreach($this->parseCommand($commandString) as $device => $status) {
                 $cachedDevice = \HomeControl\Cache::getInstance()->fetch($device);
                 if (is_object($cachedDevice)) {
-                    printf('%s (%d) - %s to %s<br/>', $cachedDevice->getName(), $cachedDevice->getTimestamp(), $cachedDevice->getstatus(), $status);
-                    $cachedDevice->setStatus($status);
-                    $cachedDevice->setTimestamp(time());
-                    \HomeControl\Cache::getInstance()->store($cachedDevice->getName(), $cachedDevice);
+                    //TODO: add logic per device, should be editable
+                    //after logic has been processed, update device
+                    $cacheUpdate = \HomeControl\Domoticz::getInstance()->updateDevice($cachedDevice->getIdx());
+                    if ($cacheUpdate) {
+                        \HomeControl\Cache::getInstance()->store($cachedDevice->getName(), $cachedDevice);
+                    }
                 }
             }
         }
