@@ -1,7 +1,7 @@
 <?php
 
-namespace HomeControl\Device;
-
+namespace HomeControl\Device
+{
 class Factory {
 
 	const TYPE_SWITCH = "Light/Switch";
@@ -20,16 +20,16 @@ class Factory {
 			case self::TYPE_SWITCH:
 				switch($device["SwitchType"]) {
 					case self::SWITCHTYPE_SWITCH_DIMMER:
-						return new HomeControl\Device\Type\LightSwitch\Dimmer($device);
+						return new \HomeControl\Device\Type\LightSwitch\Dimmer($device);
 						break;
 					case self::SWITCHTYPE_SWITCH_MOTION:
-						return new HomeControl\Device\Type\LightSwitch\MotionSensor($device);
+						return new \HomeControl\Device\Type\LightSwitch\MotionSensor($device);
 						break;
 					case self::SWITCHTYPE_SWITCH_ONOFF:
-						return new HomeControl\Device\Type\LightSwitch\OnOff($device);
+						return new \HomeControl\Device\Type\LightSwitch\OnOff($device);
 						break;
 					default:
-						return new HomeControl\Device\Type\Generic($device);
+						return new \HomeControl\Device\Type\Generic($device);
 						break;
 				}
 				break;
@@ -39,8 +39,9 @@ class Factory {
 				
 				break;
 			default:
-				return new HomeControl\Device\Type\Generic($device);
+				return new \HomeControl\Device\Type\Generic($device);
 				break;
 		}
 	}
+}
 }
