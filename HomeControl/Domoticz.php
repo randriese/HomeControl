@@ -99,7 +99,6 @@ class Domoticz {
                 return true;
             }
         } catch (Exception $ex) {
-            echo 'cannot fetch devices';
         }
         return false;
     }
