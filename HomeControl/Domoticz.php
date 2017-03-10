@@ -24,6 +24,9 @@ class Domoticz {
     **/
     public function switchDevice ($idx, $command = "Toggle", $comment = null) {
         try {
+            if (!is_null($comment)) {
+                $this->log($comment);
+            }
             $response = json_decode(file_get_contents(sprintf('%s/json.htm?type=command&param=switchlight&idx=%d&switchcmd=%s', self::URL, $idx, $command)), true);
             if ($response['status'] == 'OK') {
                 return true;
@@ -44,6 +47,9 @@ class Domoticz {
     **/
     public function setDeviceLevel ($idx, $level, $comment = null) {
         try {
+            if (!is_null($comment)) {
+                $this->log($comment);
+            }
             $response = json_decode(file_get_contents(sprintf('%s/json.htm?type=command&param=switchlight&idx=%d&switchcmd=%s&level=%d', self::URL, $idx, 'Set%20Level', $level)), true);
             if ($response['status'] == 'OK') {
                 return true;
@@ -66,6 +72,9 @@ class Domoticz {
     **/
     public function setRGBWDevice ($idx, $hue, $brightness, $isWhite, $comment = null) {
         try {
+            if (!is_null($comment)) {
+                $this->log($comment);
+            }
             $response = json_decode(file_get_contents(sprintf('%s/json.htm?type=command&param=setcolbrightnessvalue&idx=%d&hue=%d&brightness=%d&iswhite=%s', self::URL, $idx, $hue, $brightness, ($isWhite) ? 'true' : 'false')), true);
             if ($response['status'] == 'OK') {
                 return true;
@@ -84,6 +93,15 @@ class Domoticz {
     * @return void
     **/
     public function log ($message, $level = null) {
+        try {
+            $response = json_decode(file_get_contents(sprintf('%s/json.htm?type=command&param=addlogmessage&message=%s', self::URL, $message)), true);
+            if ($response['status'] == 'OK' && isset($response['result'])) {
+                return true;
+            }
+        } catch (Exception $ex) {
+            echo 'cannot fetch devices';
+        }
+        return false;
     }
 
     public function getDevices($usedOnly = true) {
