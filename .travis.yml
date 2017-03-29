@@ -7,3 +7,11 @@ php:
   - '7.1'
   - hhvm
   - nightly
+addons:
+  sonarqube:
+    organization: "randriese-github" # the key of the org you chose at step #3
+    token:
+      secure: "8ede459f2d1c6edf8beb75077f79a51593a611ab"
+script:
+  # other script steps might be done before running the actual SonarQube analysis
+  - sonar-scanner
