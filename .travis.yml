@@ -1,6 +1,8 @@
 addons:
   sonarqube:
     organization: "randriese-github" # the key of the org you chose at step #3
+    branches:
+      - develop
     token:
       secure: "8ede459f2d1c6edf8beb75077f79a51593a611ab"
 script:
