@@ -1,12 +1,3 @@
-language: php
-php:
-  - '5.4'
-  - '5.5'
-  - '5.6'
-  - '7.0'
-  - '7.1'
-  - hhvm
-  - nightly
 addons:
   sonarqube:
     organization: "randriese-github" # the key of the org you chose at step #3
@@ -15,3 +6,10 @@ addons:
 script:
   # other script steps might be done before running the actual SonarQube analysis
   - sonar-scanner
+
+jdk:
+  - oraclejdk8
+
+cache:
+  directories:
+    - '$HOME/.sonar/cache'
