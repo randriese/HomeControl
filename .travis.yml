@@ -11,7 +11,3 @@ script:
 
 jdk:
   - oraclejdk8
-
-cache:
-  directories:
-    - '$HOME/.sonar/cache'
