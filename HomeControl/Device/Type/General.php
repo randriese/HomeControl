@@ -10,7 +10,7 @@ class General
        $this->setIdx($json["idx"]);
        $this->setName($json["Name"]);
        $this->setType($json["Type"]);
-        $this->setStatus($json['Data']);
-        $this->setTimestamp(time());
+       $this->setStatus($json['Data']);
+       $this->setTimestamp(time());
     }
 }
