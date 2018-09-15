@@ -45,8 +45,8 @@ class Engine {
 				$lightDevice = \Homecontrol\Cache::getInstance()->fetch('hal-beganegrond-niveau');
 				$luxDevice = \HomeControl\Cache::getInstance()->fetch('hal-beganegrond-lux');
 
-				$username = 'admin';
-				$password = 'Baef28A1!';
+				$username = '';
+				$password = '';
 
 				switch(strtolower($status)) {
 					case "on":
